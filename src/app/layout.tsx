@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 	return (
 		<ClerkProvider>
 			<html lang="pt-BR" suppressHydrationWarning>
-				<body className={cn('antialiased', inter.className)}>
+				<body className={cn('bg-secondary antialiased', inter.className)}>
 					<ThemeProvider
 						attribute="class"
 						defaultTheme="system"

@@ -28,7 +28,11 @@ export const Navbar = () => {
 				</Link>
 			</section>
 			<section className="flex items-center gap-x-3">
-				<Button size="sm" variant="premium">
+				<Button
+					size="sm"
+					variant="premium"
+					aria-label="button upgrade plan"
+				>
 					Upgrade
 					<Sparkles className="ml-2 h-4 w-4 fill-white text-white" />
 				</Button>
