@@ -1,3 +1,3 @@
 export default function RootPage() {
-   return <div>Root Page</div>
+	return <div>Root Page</div>
 }
