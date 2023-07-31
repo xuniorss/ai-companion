@@ -2,9 +2,10 @@
 
 import { cn } from '@/lib/utils'
 import { UserButton } from '@clerk/nextjs'
-import { Menu, Sparkles } from 'lucide-react'
+import { Sparkles } from 'lucide-react'
 import { Poppins } from 'next/font/google'
 import Link from 'next/link'
+import { MobileSidebar } from '../MobileSidebar'
 import { ModeToggle } from '../ModeToggle'
 import { Button } from '../ui/button'
 
@@ -12,14 +13,10 @@ const font = Poppins({ weight: '600', subsets: ['latin'] })
 
 export const Navbar = () => {
 	return (
-		<header className="fixed z-50 flex w-full items-center justify-between border-b border-b-primary/10 bg-secondary px-4 py-2">
+		<header className="fixed z-50 flex h-16 w-full items-center justify-between border-b border-b-primary/10 bg-secondary px-4 py-2">
 			<section className="flex items-center">
-				<Menu
-					role="button"
-					aria-label="button open/close sidebar"
-					className="block md:hidden"
-				/>
-				<Link href="/">
+				<MobileSidebar />
+				<Link href="/" aria-label="Ir para página inicial">
 					<h1
 						className={cn(
 							'hidden text-xl font-bold text-primary md:block md:text-3xl',
