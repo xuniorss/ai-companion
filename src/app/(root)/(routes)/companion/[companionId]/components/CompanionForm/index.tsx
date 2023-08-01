@@ -21,6 +21,7 @@ import {
 } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
 import { Textarea } from '@/components/ui/textarea'
+import { useToast } from '@/components/ui/use-toast'
 import { PREAMBLE, SEED_CHAT } from '@/constants/companion'
 import {
 	CompanionForm as CompProps,
@@ -28,7 +29,9 @@ import {
 } from '@/models/companion'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Category, Companion } from '@prisma/client'
+import axios from 'axios'
 import { Wand2 } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useCallback, useMemo } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
@@ -41,6 +44,9 @@ export const CompanionForm = ({
 	initialData,
 	categories,
 }: CompanionFormProps) => {
+	const { toast } = useToast()
+	const router = useRouter()
+
 	const form = useForm<CompProps>({
 		resolver: zodResolver(SchemaCompanionForm),
 		defaultValues: initialData || {
@@ -58,9 +64,23 @@ export const CompanionForm = ({
 		[form.formState.isSubmitting],
 	)
 
-	const onSubmit: SubmitHandler<CompProps> = useCallback(async (values) => {
-		console.log(values)
-	}, [])
+	const onSubmit: SubmitHandler<CompProps> = useCallback(
+		async (values) => {
+			try {
+				if (initialData)
+					await axios.patch(`/api/companion/${initialData.id}`, values)
+				else await axios.post('/api/companion', values)
+
+				toast({ description: 'Sucesso.' })
+
+				router.refresh()
+				router.push('/')
+			} catch (error) {
+				toast({ variant: 'destructive', description: 'Algo deu errado.' })
+			}
+		},
+		[initialData, router, toast],
+	)
 
 	return (
 		<article className="mx-auto h-full max-w-3xl space-y-2 p-4">
@@ -73,7 +93,7 @@ export const CompanionForm = ({
 						<div>
 							<h3 className="text-lg font-medium">Informações gerais</h3>
 							<p className="text-sm text-muted-foreground">
-								Informações gerais sobre seu companion
+								Informações gerais sobre seu personagem
 							</p>
 						</div>
 						<Separator className="bg-primary/10" />
@@ -108,7 +128,7 @@ export const CompanionForm = ({
 										/>
 									</FormControl>
 									<FormDescription>
-										É assim que seu AI Companion será nomeado.
+										É assim que seu AI Personagem será nomeado.
 									</FormDescription>
 									<FormMessage />
 								</FormItem>
@@ -128,7 +148,7 @@ export const CompanionForm = ({
 										/>
 									</FormControl>
 									<FormDescription>
-										Breve descrição do seu AI Companion
+										Breve descrição do seu AI Personagem
 									</FormDescription>
 									<FormMessage />
 								</FormItem>
@@ -199,7 +219,7 @@ export const CompanionForm = ({
 								</FormControl>
 								<FormDescription>
 									Descreva detalhadamente seu acompanhante
-									companion&apos;s história de fundo e detalhes
+									personagem&apos;s história de fundo e detalhes
 									relevantes.
 								</FormDescription>
 								<FormMessage />
@@ -233,8 +253,8 @@ export const CompanionForm = ({
 					<div className="flex w-full justify-center">
 						<Button size="lg" disabled={isLoading}>
 							{initialData
-								? 'Edite seu companion'
-								: 'Crie o seu companion'}
+								? 'Edite seu personagem'
+								: 'Crie o seu personagem'}
 							<Wand2 className="ml-2 h-4 w-4" />
 						</Button>
 					</div>

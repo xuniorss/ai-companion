@@ -3,6 +3,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 import './globals.css'
 
 import { ThemeProvider } from '@/components/theme-provider'
+import { Toaster } from '@/components/ui/toaster'
 import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 						enableSystem
 					>
 						{children}
+						<Toaster />
 					</ThemeProvider>
 				</body>
 			</html>
