@@ -1,12 +1,12 @@
 'use client'
 
-import { useDebounce } from '@/hooks/useDebounce'
 import { Search } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import qs from 'query-string'
 import {
 	ChangeEventHandler,
 	useCallback,
+	useDeferredValue,
 	useEffect,
 	useMemo,
 	useState,
@@ -25,7 +25,8 @@ export const SearchInput = () => {
 	const name = useMemo(() => searchParams.get('name'), [searchParams])
 
 	const [value, setValue] = useState(name || '')
-	const debouncedValue = useDebounce<string>(value)
+	// const debouncedValue = useDebounce<string>(value)
+	const defferedValue = useDeferredValue(value)
 
 	const onChange: ChangeEventHandler<HTMLInputElement> = useCallback(
 		(e) => setValue(e.target.value),
@@ -34,7 +35,7 @@ export const SearchInput = () => {
 
 	useEffect(() => {
 		const query: { name: string; categoryId: string | null } = {
-			name: debouncedValue,
+			name: defferedValue,
 			categoryId,
 		}
 
@@ -47,7 +48,7 @@ export const SearchInput = () => {
 		)
 
 		router.push(url)
-	}, [categoryId, debouncedValue, router])
+	}, [categoryId, defferedValue, router])
 
 	return (
 		<div className="relative">
