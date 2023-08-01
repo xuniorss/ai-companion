@@ -22,7 +22,7 @@ export const ButtonCategory = ({
 	...props
 }: ButtonProps) => {
 	return (
-		<button className={button({ bgColor })} {...props}>
+		<button className={button({ bgColor, className })} {...props}>
 			{props.children}
 		</button>
 	)
