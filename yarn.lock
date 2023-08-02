@@ -1718,6 +1718,11 @@ dot-case@^3.0.4:
     no-case "^3.0.4"
     tslib "^2.0.3"
 
+dotenv@^16.3.1:
+  version "16.3.1"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.3.1.tgz#369034de7d7e5b120972693352a3bf112172cc3e"
+  integrity sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==
+
 electron-to-chromium@^1.4.477:
   version "1.4.477"
   resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.477.tgz"
@@ -3154,6 +3159,11 @@ open@^9.1.0:
     is-inside-container "^1.0.0"
     is-wsl "^2.2.0"
 
+openai-edge@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/openai-edge/-/openai-edge-1.2.2.tgz#0b1cd5aec2c366bbd25cdeba05399aa6eef73230"
+  integrity sha512-C3/Ao9Hkx5uBPv9YFBpX/x59XMPgPUU4dyGg/0J2sOJ7O9D98kD+lfdOc7v/60oYo5xzMGct80uFkYLH+X2qgw==
+
 openai@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/openai/-/openai-3.3.0.tgz#a6408016ad0945738e1febf43f2fccca83a3f532"
@@ -3507,6 +3517,11 @@ regexp.prototype.flags@^1.4.3, regexp.prototype.flags@^1.5.0:
     call-bind "^1.0.2"
     define-properties "^1.2.0"
     functions-have-names "^1.2.3"
+
+replicate@^0.14.1:
+  version "0.14.1"
+  resolved "https://registry.yarnpkg.com/replicate/-/replicate-0.14.1.tgz#d84a91cf4cfaf256e16a8cb692589da8d8046f0e"
+  integrity sha512-3NpuNRbvXoEjY+n/ra24VfQyIRCdLub9GCrU51fFTrMaa6OjRvMC9jGDJSpGRXOLvID75mFgN577HEhA3XEFtg==
 
 resolve-from@^4.0.0:
   version "4.0.0"
