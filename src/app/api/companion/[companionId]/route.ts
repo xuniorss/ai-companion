@@ -1,6 +1,6 @@
 import prismadb from '@/lib/prismadb'
 import { SchemaCompanionForm } from '@/models/companion'
-import { currentUser } from '@clerk/nextjs'
+import { auth, currentUser } from '@clerk/nextjs'
 import { NextResponse } from 'next/server'
 
 export const PATCH = async (
@@ -49,6 +49,26 @@ export const PATCH = async (
 		return NextResponse.json(companion)
 	} catch (error) {
 		console.error('[COMPANION_PATCH]', error)
+		return new NextResponse('Internal Server Error', { status: 500 })
+	}
+}
+
+export const DELETE = async (
+	req: Request,
+	{ params }: { params: { companionId: string } },
+) => {
+	try {
+		const { userId } = auth()
+
+		if (!userId) return new NextResponse('Unauthorized', { status: 401 })
+
+		const companion = await prismadb.companion.delete({
+			where: { userId, id: params.companionId },
+		})
+
+		return NextResponse.json(companion)
+	} catch (error) {
+		console.error('[COMPANION_DELETE]', error)
 		return new NextResponse('Internal Server Error', { status: 500 })
 	}
 }
